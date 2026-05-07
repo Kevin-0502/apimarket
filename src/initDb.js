@@ -24,5 +24,19 @@ export const initDb = async () => {
     )
   `)
 
+  await pool.query(`
+    INSERT INTO usuarios (nombre, correo, clave) VALUES
+    ('Ricardo', 'ricardo.andrade@example.com', '123456'),
+    ('Juan', 'juan.perez@example.com', '654321')
+    ON CONFLICT (correo) DO NOTHING
+  `)
+
+  await pool.query(`
+    INSERT INTO productos (nombre, descripcion, precio_costo, precio_venta, cantidad, fotografia) VALUES
+    ('manzana verde', 'manzana de china', 10.50, 15.00, 100,
+    'https://static.vecteezy.com/system/resources/thumbnails/012/086/172/small/green-apple-with-green-leaf-isolated-on-white-background-vector.jpg')
+    ON CONFLICT DO NOTHING
+  `)
+
   console.log('Tablas listas')
 }
